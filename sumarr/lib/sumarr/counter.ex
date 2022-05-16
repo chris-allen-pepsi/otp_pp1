@@ -1,13 +1,13 @@
 defmodule Sumarr.Counter do
   def new(input) do
-    String.to_integer(input)
+    %{counter: String.to_integer(input)}
   end
 
-  def add(acc, n) do
-    acc + n
+  def add(%{counter: acc}, n) do
+    %{counter: acc + n}
   end
 
   def message(input) do
-    "The result is #{input}."
+    "The result is #{input.counter}."
   end
 end
