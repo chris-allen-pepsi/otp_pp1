@@ -15,6 +15,7 @@ defmodule Sumarr.Service do
 
   def show(counter_pid) do
     send(counter_pid, {:show, self()})
+
     receive do
       message -> message
     end
