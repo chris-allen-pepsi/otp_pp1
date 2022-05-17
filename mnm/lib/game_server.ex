@@ -4,6 +4,10 @@ defmodule Mnm.GameServer do
   alias Mnm.Game
 
   # Server
+  def init(:random) do
+    init(random_answer())
+  end
+
   def init(answer) do
     {:ok, Game.new(answer)}
   end
@@ -15,12 +19,16 @@ defmodule Mnm.GameServer do
 
   # Client
   def start_link(answer) do
-    GenServer.start_link(__MODULE__, answer, [name: :game_server])
+    GenServer.start_link(__MODULE__, answer, name: :game_server)
   end
 
   def guess(pid \\ :game_server, guess) do
     pid
     |> GenServer.call({:add_guess, guess})
     |> IO.puts()
+  end
+
+  def random_answer do
+    1..8 |> Enum.shuffle() |> Enum.take(4)
   end
 end
