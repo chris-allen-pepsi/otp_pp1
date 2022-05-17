@@ -8,12 +8,9 @@ defmodule Mnm.GameServer do
     {:ok, Game.new(answer)}
   end
 
-  def handle_cast({:add_guess, guess}, state) do
-    {:noreply, Game.add_guess(state, guess)}
-  end
-
-  def handle_call(:results, _from, state) do
-    {:reply, Game.get_results(state), state}
+  def handle_call({:add_guess, guess}, _from, game) do
+    game = Game.add_guess(game, guess)
+    {:reply, Game.get_results(game), game}
   end
 
   # Client
@@ -22,10 +19,8 @@ defmodule Mnm.GameServer do
   end
 
   def guess(pid \\ :game_server, guess) do
-    GenServer.cast(pid, {:add_guess, guess})
-  end
-
-  def results(pid \\ :game_server) do
-    GenServer.call(pid, :results)
+    pid
+    |> GenServer.call({:add_guess, guess})
+    |> IO.puts()
   end
 end

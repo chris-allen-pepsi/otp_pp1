@@ -3,6 +3,8 @@ defmodule Sumarr.Server do
 
   alias Sumarr.Counter
 
+  # Server Side
+
   def init(init_arg) do
     {:ok, Counter.new(init_arg)}
   end
