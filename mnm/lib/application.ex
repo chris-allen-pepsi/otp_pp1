@@ -9,7 +9,10 @@ defmodule Mnm.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: Mnm.GameServer.start_link(arg)
-      {Mnm.GameServer, :random}
+      {Mnm.GameServer, name: :hockman},
+      {Mnm.GameServer, name: :allen},
+      {Mnm.GameServer, name: :elom},
+      {Mnm.GameServer, name: :elliott}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
