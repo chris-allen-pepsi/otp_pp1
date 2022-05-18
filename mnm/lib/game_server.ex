@@ -4,6 +4,13 @@ defmodule Mnm.GameServer do
   alias Mnm.Game
 
   # Server
+  def child_spec(opts) do
+    %{
+      id: opts[:name] || __MODULE__,
+      start: {__MODULE__, :start_link, [opts]}
+    }
+  end
+
   def init(:random) do
     init(random_answer())
   end
@@ -18,8 +25,8 @@ defmodule Mnm.GameServer do
   end
 
   # Client
-  def start_link(answer) do
-    GenServer.start_link(__MODULE__, answer, name: :game_server)
+  def start_link(opts) do
+    GenServer.start_link(__MODULE__, opts[:answer] || :random, name: opts[:name] || :game_server)
   end
 
   def guess(pid \\ :game_server, guess) do
