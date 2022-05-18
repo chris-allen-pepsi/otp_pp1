@@ -10,11 +10,7 @@ defmodule Mnm.Application do
     IO.puts("starting supervisor")
 
     children = [
-      # Starts a worker by calling: Mnm.GameServer.start_link(arg)
-      {Mnm.GameServer, name: :hockman},
-      {Mnm.GameServer, name: :allen},
-      {Mnm.GameServer, name: :elom},
-      {Mnm.GameServer, name: :elliott}
+      {DynamicSupervisor, strategy: :one_for_one, name: :dyn_sup}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
