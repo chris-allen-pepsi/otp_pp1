@@ -1,18 +1,5 @@
 defmodule Mnm do
-  @moduledoc """
-  Documentation for `Mnm`.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Mnm.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def guess(player_name, guess) do
+    Mnm.GameServer.guess(player_name, guess)
   end
 end

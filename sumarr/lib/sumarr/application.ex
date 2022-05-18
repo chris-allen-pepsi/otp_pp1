@@ -9,7 +9,7 @@ defmodule Sumarr.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: Sumarr.Worker.start_link(arg)
-      # {Sumarr.Worker, arg}
+      # {Sumarr.Server, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

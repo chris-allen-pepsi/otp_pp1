@@ -12,6 +12,7 @@ defmodule Mnm.GameServer do
   end
 
   def init(:random) do
+    IO.puts("starting game")
     init(random_answer())
   end
 
@@ -26,6 +27,7 @@ defmodule Mnm.GameServer do
 
   # Client
   def start_link(opts) do
+    IO.puts("calling genserver to start game #{opts[:name]}")
     GenServer.start_link(__MODULE__, opts[:answer] || :random, name: opts[:name] || :game_server)
   end
 
